@@ -1,0 +1,30 @@
+/*	Author: Adam Hess
+*   Contact: adamhess347@gmail.com
+*/
+
+.anOption {
+	width:50px;
+	margin: 5px;
+}
+#canvas {
+	position: relative;
+	left: 10px;
+	font-size: 25;
+	font-family: monospace,Courier;
+}
+#optionBar { 
+	margin	:10px;
+	padding:10px;
+
+}
+
+#executeButton {
+	width: 120px;
+}
+
+#errorMessage {
+	color: white;
+	background-color: red;
+	font-weight: bold;
+
+}

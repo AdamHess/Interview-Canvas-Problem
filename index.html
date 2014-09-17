@@ -1,0 +1,31 @@
+<!-- Author: Adam Hess
+   Contact: adamhess347@gmail.com-->
+
+<html>
+	<body>
+	<div id="canvas"> 
+	</div>
+	<span id="optionBar"> 
+		<select id="action">
+			<option value="create">Create Canvas</option>
+			<option value="line">Draw Line</option>
+			<option value="rectangle">Draw Rectangle</option>
+			<option value="fill">Bucket Fill</option>
+		</select>
+		<span id="options">
+		</span>
+		<button type="button" id="resetButton">Clear Canvas</button>
+		<button type="button" id="executeButton">Execute Action</button>
+		<button type="button" id="runUnitTests">Run Unit Tests</button>
+	</span>
+	<div id="errorMessage"> </div>
+	<div id="unitTestMessageArea"></div>
+	</body>
+	<footer>
+
+		<link rel="stylesheet"  type="text/css" href="styling.css"></link>
+		<script src="unit_tests.js" ></script>		
+		<script src="canvas.js" ></script>		
+		<script src="main.js" ></script>		
+	</footer>
+</html>
