@@ -4,7 +4,13 @@
 
 //Sets up all the click functionality of the HTML page after the page i loaded
 
-window.onload = function() {
+
+define(['./canvas',
+	'./unit_tests'],
+	function(Canvas,
+		 UnitTester) {
+
+
 	var aCanvas = new Canvas();	 
 	document.getElementById('resetButton').onclick = function() {
 		aCanvas.resetCanvas();
@@ -96,16 +102,16 @@ window.onload = function() {
 		// that we are currently working with
 		var testerCanvas = new Canvas();
 		document.getElementById('unitTestMessageArea').innerHTML ='';
-		var testMessage = unitTester.runAllTests(testerCanvas, true);	
+		var testMessage = UnitTester.runAllTests(testerCanvas, true);	
 		document.getElementById('unitTestMessageArea').innerHTML = testMessage;
-	}	
-	var initializePage = function() {
-		setCanvasOptions();
-		// aCanvas.setDimensions(10,10);
-		// aCanvas.displayCanvas(true);
 	};
 
-	initializePage();
+	//equivelent of Main	
+	var initializePage = function() {
+		setCanvasOptions();
+	};
+
+	return initializePage;
 
 
-};
+});
