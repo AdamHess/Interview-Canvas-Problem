@@ -6,9 +6,11 @@
 
 
 define(['./canvas',
-	'./unit_tests'],
+	'./unit_tests',
+	'css!./styling'],
 	function(Canvas,
-		 UnitTester) {
+		 UnitTester,
+		 PageCSS) {
 
 
 	var aCanvas = new Canvas();	 
