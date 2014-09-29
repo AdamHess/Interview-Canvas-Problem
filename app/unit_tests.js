@@ -2,8 +2,9 @@
 *   Contact: adamhess347@gmail.com
 */
 
+define([], function() {
 //Basic unit tests for all features 
-var unitTester = {
+var UnitTester = {
   log: function(text) {
     this.testMessage += text;
     //line breaks for displaying in browser
@@ -234,3 +235,5 @@ var unitTester = {
     }
 
 };
+return UnitTester;
+});

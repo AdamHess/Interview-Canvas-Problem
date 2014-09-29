@@ -2,6 +2,8 @@
 *   Contact: adamhess347@gmail.com
 */
 
+define([], function() {
+
 //This file contains the raw logic for creating 
 //and working with the Canvas object 
 var Canvas = function () {
@@ -253,3 +255,5 @@ var Canvas = function () {
 
 	};
 
+	return Canvas;
+});

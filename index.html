@@ -5,7 +5,7 @@
 	<body>
 	<div id="canvas"> 
 	</div>
-	<span id="optionBar"> 
+	<spdan id="optionBar"> 
 		<select id="action">
 			<option value="create">Create Canvas</option>
 			<option value="line">Draw Line</option>
@@ -22,10 +22,12 @@
 	<div id="unitTestMessageArea"></div>
 	</body>
 	<footer>
+		<script type="text/javascript" src="external_libraries/require.js"></script>	
+		<script type="text/javascript" src="requireconfig.js"></script>
+		<script type="text/javascript">
+		    require(['app/main']);
+		</script>
+	
 
-		<link rel="stylesheet"  type="text/css" href="styling.css"></link>
-		<script src="unit_tests.js" ></script>		
-		<script src="canvas.js" ></script>		
-		<script src="main.js" ></script>		
 	</footer>
 </html>
