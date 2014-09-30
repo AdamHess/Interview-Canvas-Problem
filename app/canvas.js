@@ -2,7 +2,7 @@
 *   Contact: adamhess347@gmail.com
 */
 
-define([], function() {
+define(['jquery'], function($) {
 
 //This file contains the raw logic for creating 
 //and working with the Canvas object 
@@ -50,7 +50,7 @@ var Canvas = function () {
 			this.size.xDimension = 0;
 			this.size.yDimension = 0;
 			this.cleanCanvas();
-		}
+		};
 
 
 		this.displayCanvas = function(displayInBrowser) {
@@ -92,8 +92,7 @@ var Canvas = function () {
 			}
 			if (displayInBrowser) {
 				textToDisplay = textToDisplay.split(' ').join('_');
-				var browserCanvas = document.getElementById('canvas');
-				browserCanvas.innerHTML =  textToDisplay;
+				$('#canvas').html(textToDisplay);
 			}
 			else {
 				console.log(textToDisplay);
@@ -101,7 +100,7 @@ var Canvas = function () {
 			return false;
 		};
 
-		this.drawLine =  function(x1, y1, x2, y2, supressDisplayCanvasInConsole) {
+		this.drawLine =  function(x1, y1, x2, y2) {
 			if ((x1 !== x2 ) && (y1 !== y2)) { 
 				return 'Diagonal Lines are not supported';
 			}
@@ -135,13 +134,11 @@ var Canvas = function () {
 					this._unRenderedCanvas[yIndex][x1] = 'x';
 				}
 			}
-			if (!supressDisplayCanvasInConsole) {
-				this.displayCanvas();
-			}
+			
 			return false;
 		};
 
-		this.drawReq = function(x1, y1, x2, y2, supressDisplayCanvasInConsole) {
+		this.drawReq = function(x1, y1, x2, y2) {
 			if ((x1 > x2) || (y1 > y2)) {
 				return 'X1 and Y1 cannot be greater than X2 or Y2';
 			}
@@ -160,13 +157,10 @@ var Canvas = function () {
 			this.drawLine(x1, y2, x2, y2, true);
 			this.drawLine(x1, y1, x1, y2, true);
 			this.drawLine(x2, y1, x2, y2, true);
-			if (!supressDisplayCanvasInConsole) {
-				this.displayCanvas();
-			}
 			return false;
 		};
 
-		this.bucketFillArea =  function(x,y, color, supressDisplayCanvasInConsole) { 
+		this.bucketFillArea =  function(x,y, color) { 
 			if (color ==='x') {
 				return 'Cannot use \'x\' as a fill color ';
 			}
@@ -181,13 +175,9 @@ var Canvas = function () {
 										  currNode[1],
 										  color);
 			}
-			if (!supressDisplayCanvasInConsole) {
-				this.displayCanvas();
-			}
 			return false;
 
 		};
-
 		this._walkInEachDirection= function(x, y, color) {
 			//mark currecnt spot 
 			this._currentSquare = '';
