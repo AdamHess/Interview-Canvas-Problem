@@ -12,7 +12,7 @@ I am slowly fleshing it out from the initial project I submitted.
 Partof the roadmap includes: 
 
 1. Using MVC design with Backbone, Marionette (though thinking about using angularjs) 
-2. Switch from direct dom manipulation to using jQuery (I originally wanted to keep it light/raw javascript) 
+2. ~~Switch from direct dom manipulation to using jQuery (I originally wanted to keep it light/raw javascript) ~~
 3. Use validator.js
 4. ~~Add requirejs text loading plugin~~
 5. add bower, grunt and npm support.
