@@ -7,64 +7,63 @@
 
 define(['./canvas',
 	'./unit_tests',
-	'css!./styling'],
+	'css!./styling',
+	'jquery'],
 	function(Canvas,
 		 UnitTester,
-		 PageCSS) {
+		 PageCSS,
+		 $) {
 
 
 	var aCanvas = new Canvas();	 
-	document.getElementById('cleanCanvasButton').onclick = function() {
+	$('#cleanCanvasButton').click( function() {
 		aCanvas.cleanCanvas();
 		aCanvas.displayCanvas(true);
-	};
-	document.getElementById('executeButton').onclick = function() {
+	});
+	$('#executeButton').click(function() {
 		//the browser is treating all the numbers as strings
 		//force it to use them as Numbers
 		var isErrored = false; 
-			document.getElementById('errorMessage').innerText =	'';
-		switch(document.getElementById('action').value) {
-			case 'create':
-				var width = Number(document.getElementById('option_Width').value);
-				var height = Number(document.getElementById('option_Height').value);
-				isErrored = aCanvas.setDimensions(width, height);
-				enableDropDownOptions();			
-				break;
-			case 'line':
-				var x1 = Number(document.getElementById('option_X1').value);
-				var y1 = Number(document.getElementById('option_Y1').value);
-				var x2 = Number(document.getElementById('option_X2').value);
-				var y2 = Number(document.getElementById('option_Y2').value);
-				isErrored = aCanvas.drawLine(x1,y1,x2,y2, true);
-				break;
-			case 'rectangle':
-				//underscores stops jshint from complaining
-				var x_1 = Number(document.getElementById('option_X1').value);
-				var y_1 = Number(document.getElementById('option_Y1').value);
-				var x_2 = Number(document.getElementById('option_X2').value);
-				var y_2 = Number(document.getElementById('option_Y2').value);
-				isErrored = aCanvas.drawReq(x_1,y_1,x_2,y_2, true);
-				break;
-			case 'fill':
-				var x = Number(document.getElementById('option_X').value);
-				var y = Number(document.getElementById('option_Y').value);
-				var color = document.getElementById('option_Color').value;
-				isErrored = aCanvas.bucketFillArea(x,y,color);
-				break;
-		}		
+		$('#errorMessage').empty();
+		var action = $('#action').val();
+		if (action === 'create') {
+			var width = Number($('#option_Width').val());
+			var height = Number($('#option_Height').val());
+			isErrored = aCanvas.setDimensions(width, height);
+			enableDropDownOptions();			
+		}
+		else if ((action === 'line') ||  (action == 'rectangle')) {
+			var x1 = Number($('#option_X1').val());
+			var y1 = Number($('#option_Y1').val());
+			var x2 = Number($('#option_X2').val());
+			var y2 = Number($('#option_Y2').val());
+			if (action === 'line') {
+				isErrored = aCanvas.drawLine(x1,y1,x2,y2);
+			}
+			else {
+				isErrored = aCanvas.drawReq(x1,y1,x2,y2);
+			}
+		}
+		else if (action == 'fill') {
+			var x = Number($('#option_X').val());
+			var y = Number($('#option_Y').val());
+			var color = $('#option_Color').val();
+			isErrored = aCanvas.bucketFillArea(x,y,color);
+		}
+
 		if (isErrored) {
-			document.getElementById('errorMessage').innerText = 'Invalid Input: ' + isErrored;
+			$('#errorMessage').html('Invalid Input: ' + isErrored);
 		}
 		else {
 			aCanvas.displayCanvas(true);
 		}
-	};	
+	
+	});	
 
 	function setCanvasOptions() {
-		var optionsEl = document.getElementById('options');
-		optionsEl.innerHTML = '';		
+		var optionsEl = $('#options');	
 		var labels = [];
-		var action = document.getElementById('action').value;
+		var action = $('#action').val();
 		switch(action) {
 			case 'create':
 				labels = ['Width', 'Height'];
@@ -108,35 +107,36 @@ define(['./canvas',
 							'</label>';
 
 		}
-		optionsEl.innerHTML = optionHtml;
-	};
+		optionsEl.html(optionHtml);
+	}
 
-	document.getElementById('action').onchange = setCanvasOptions;
-	document.getElementById('runUnitTests').onclick = function() {
+	$('#action').change(setCanvasOptions);
+	$('#runUnitTests').click( function() {
 		//create a new canvas so the unit tests dont modify the one 
 		// that we are currently working with
 		var testerCanvas = new Canvas();
-		document.getElementById('unitTestMessageArea').innerHTML ='';
+		$('#unitTestMessageArea').empty();
 		var testMessage = UnitTester.runAllTests(testerCanvas, true);	
-		document.getElementById('unitTestMessageArea').innerHTML = testMessage;
-	};
+		$('#unitTestMessageArea').append(testMessage);
+	});
 
 
 	function disableDropDownOptions() {
-		document.getElementById('action_line').disabled = true;
-		document.getElementById('action_rectangle').disabled = true;		
-		document.getElementById('action_fill').disabled = true;				
+		$('#action_line').prop('disabled', true);
+		$('#action_rectangle').prop('disabled', true);
+		$('#action_fill').prop('disabled', true);
 	}
 	function enableDropDownOptions() {
-		document.getElementById('action_line').disabled = false;
-		document.getElementById('action_rectangle').disabled = false;		
-		document.getElementById('action_fill').disabled = false;					
+		$('#action_line').prop('disabled', false);
+		$('#action_rectangle').prop('disabled', false);
+		$('#action_fill').prop('disabled', false);
 	}
 	//equivelent of Main	
 	function initializePage() {
 		aCanvas.resetCanvas();
+		disableDropDownOptions();
 		setCanvasOptions();
-	};[]
+	}
 
 	return initializePage;
 
