@@ -11,11 +11,13 @@ The goal was to build a series of functions that will act like a "canvas" and "d
 I am slowly fleshing it out from the initial project I submitted.
 Partof the roadmap includes: 
 
-1. Using MVC design with Backbone, Marionette (though thinking about using angularjs) 
+1.  MVC/MVP design with Backbone, Marionette (though thinking about using angularjs) 
 2. ~~Switch from direct dom manipulation to using jQuery (I originally wanted to keep it light/raw javascript)~~
 3. Use validator.js
 4. ~~Add requirejs text loading plugin~~
 5. add bower, grunt and npm support.
 6. possibly include a backend for saving the various canvas (maybe do it with Meteorjs?) 
+7. Grunt Tasks: css-min, uglifyjs/js-minification and r.js 
+8. use unit testing framework. 
 
 
