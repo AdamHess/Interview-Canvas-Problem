@@ -14,8 +14,8 @@ define(['./canvas',
 
 
 	var aCanvas = new Canvas();	 
-	document.getElementById('resetButton').onclick = function() {
-		aCanvas.resetCanvas();
+	document.getElementById('cleanCanvasButton').onclick = function() {
+		aCanvas.cleanCanvas();
 		aCanvas.displayCanvas(true);
 	};
 	document.getElementById('executeButton').onclick = function() {
@@ -28,6 +28,7 @@ define(['./canvas',
 				var width = Number(document.getElementById('option_Width').value);
 				var height = Number(document.getElementById('option_Height').value);
 				isErrored = aCanvas.setDimensions(width, height);
+				enableDropDownOptions();			
 				break;
 			case 'line':
 				var x1 = Number(document.getElementById('option_X1').value);
@@ -59,11 +60,12 @@ define(['./canvas',
 		}
 	};	
 
-	var setCanvasOptions = function() {
+	function setCanvasOptions() {
 		var optionsEl = document.getElementById('options');
 		optionsEl.innerHTML = '';		
 		var labels = [];
-		switch(document.getElementById('action').value) {
+		var action = document.getElementById('action').value;
+		switch(action) {
 			case 'create':
 				labels = ['Width', 'Height'];
 				break;
@@ -79,16 +81,27 @@ define(['./canvas',
 		}
 		var optionHtml  = '';
 		for (var i =0; i< labels.length; i++ ) {
-			if (labels[i] == 'Color') {	
+			if (labels[i] === 'Color') {	
 				optionHtml += '<input type=\"text\" '+ 
 					'name=\"Color\"' +
-					'id=\"option_'+ labels[i]+'\"maxlength=\"1\" class=\"anOption\" requred>';	
+					'id=\"option_'+ labels[i]+'\"maxlength=\"1\" minlength=\"1\" class=\"anOption\" requred>';	
 
 			}
 			else {
+
+				var maxDim = '';
+				if (action !== 'create') {
+					
+					if (labels[i][0] === 'X') {
+						maxDim = aCanvas.size.xDimension-1;
+					}
+					if (labels[i][0] === 'Y') {
+						maxDim = aCanvas.size.yDimension-1;
+					}
+				}
 				optionHtml += '<input type=\"number\" '+ 
 								'name=\"' + labels[i]+'\"' +
-								'id=\"option_'+ labels[i]+'\" class=\"anOption\" requred>';
+								'id=\"option_'+ labels[i]+'\"  min=\"0\" max=\"' + maxDim+ '\" class=\"anOption\" requred>';
 			}
 			optionHtml += '<label for=\"'+ labels[i]+'\">'+
 							labels[i] +
@@ -108,10 +121,22 @@ define(['./canvas',
 		document.getElementById('unitTestMessageArea').innerHTML = testMessage;
 	};
 
+
+	function disableDropDownOptions() {
+		document.getElementById('action_line').disabled = true;
+		document.getElementById('action_rectangle').disabled = true;		
+		document.getElementById('action_fill').disabled = true;				
+	}
+	function enableDropDownOptions() {
+		document.getElementById('action_line').disabled = false;
+		document.getElementById('action_rectangle').disabled = false;		
+		document.getElementById('action_fill').disabled = false;					
+	}
 	//equivelent of Main	
-	var initializePage = function() {
+	function initializePage() {
+		aCanvas.resetCanvas();
 		setCanvasOptions();
-	};
+	};[]
 
 	return initializePage;
 

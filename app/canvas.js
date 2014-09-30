@@ -25,16 +25,13 @@ var Canvas = function () {
 			this.size.xDimension = x;
 			this.size.yDimension = y;
 			if (changed) {
-				this.resetCanvas();
+				this.cleanCanvas();
 			}
 			return false;
 
 		};
-
-		this.resetCanvas =function() {
-			if ((this.size.xDimension <= 0) ||(this.size.yDimension <= 0))  {
-				return 'Canvas has Invalid Dimensions';
-			}
+		//wipes canvas clean of anything
+		this.cleanCanvas =function() {
 			var canvas  = [];
 			var blankArray=[];
 			//create a blank row xDimension long
@@ -48,6 +45,13 @@ var Canvas = function () {
 			this._unRenderedCanvas = canvas;
 			return false;
 		};
+		//completely obliterates canvas.
+		this.resetCanvas = function() {	
+			this.size.xDimension = 0;
+			this.size.yDimension = 0;
+			this.cleanCanvas();
+		}
+
 
 		this.displayCanvas = function(displayInBrowser) {
 			if (this.size.xDimension ===0 ||

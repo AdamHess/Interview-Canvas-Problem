@@ -93,19 +93,19 @@ var UnitTester = {
                [' ',' ','x',' ',' ']];
 
        aCanvas.setDimensions(5,5);
-       aCanvas.resetCanvas();
+       aCanvas.cleanCanvas();
 
       aCanvas.drawLine(1,2,4,2, true);
       var result = this._compareMatrix(canvas1, 
               aCanvas.getCanvasArray()) ? 'Passed!' : 'Failed!';
       this.log('Test 1: Draw Line Horizontal line from (1,2) to (4,2): ' + result);
-      aCanvas.resetCanvas();
+      aCanvas.cleanCanvas();
       aCanvas.drawLine(3,0,3,3, true);
       result = this._compareMatrix(canvas2, 
               aCanvas.getCanvasArray()) ? 'Passed!' : 'Failed!';
       this.log('Test 2: Draw Line Vertical line from (3,0) to (3,3): ' + result);
 
-      aCanvas.resetCanvas();
+      aCanvas.cleanCanvas();
       aCanvas.drawLine(2,0,2,4, true);
       aCanvas.drawLine(0,2,4,2, true);    
       result = this._compareMatrix(canvas3, 
@@ -153,18 +153,18 @@ var UnitTester = {
                [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']];
       aCanvas.setDimensions(10,10);
        
-      aCanvas.resetCanvas();
+      aCanvas.cleanCanvas();
       aCanvas.drawReq(2,2,6,5,true);
     var result = this._compareMatrix(canvas1, 
               aCanvas.getCanvasArray()) ? 'Passed!' : 'Failed!';
       this.log('Test 1: Draw Rectangle using points (2,2) (6,5): ' + result);
 
-    aCanvas.resetCanvas();
+    aCanvas.cleanCanvas();
       aCanvas.drawReq(1,0,3,3,true);
     result = this._compareMatrix(canvas2, 
               aCanvas.getCanvasArray()) ? 'Passed!' : 'Failed!';
       this.log('Test 2: Draw Rectangle using points (1,0) (3,3): ' + result);
-    aCanvas.resetCanvas();
+    aCanvas.cleanCanvas();
       aCanvas.drawReq(0,0,5,4,true);
       aCanvas.drawReq(3,2,8,7,true);
       result = this._compareMatrix(canvas3, 
@@ -207,7 +207,7 @@ var UnitTester = {
 
   		aCanvas.setDimensions(10,10);
   		var resetBucketFillTest = function() {
-	  		aCanvas.resetCanvas();
+	  		aCanvas.cleanCanvas();
 	  		aCanvas.drawReq(0,0,5,4,true);
 	  		aCanvas.drawReq(3,2,8,7,true);
 	  	};
